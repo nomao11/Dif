@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Materials</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Materials</h1>
+        <a href="{{ url_for('add_material') }}" class="btn btn-primary">Add Material</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Min Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materials %}
+                    <tr>
+                        <td>{{ material.name }}</td>
+                        <td>{{ material.type }}</td>
+                        <td>{{ material.quantity }}</td>
+                        <td>{{ material.min_quantity }}</td>
+                        <td>{{ material.price }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_material', id=material.id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ url_for('delete_material', id=material.id) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <h2>Partners</h2>
+        <a href="{{ url_for('index_partners') }}" class="btn btn-secondary">View Partners</a>
+    </div>
+</body>
+</html>
